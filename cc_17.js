@@ -48,3 +48,28 @@ rep1.addClient(customer1); // Using customer1 from Task 1
 
 // Get total spent by a client
 rep1.getClientTotal('Scum'); // Should return the total we saw in Task 1
+
+// Task 3
+class VIPCustomer extends Customer{
+    constructor(name, email, vipLevel){
+        super(name, email)
+        this.vipLevel = vipLevel;
+        console.log(`New VIP Customer: ${name}, ${vipLevel} Tier`)  
+    }
+    getTotalSpent(){
+        const baseTotal = super.getTotalSpent();
+        // Calculates bonus
+        const bonus = baseTotal * 0.10
+        const totalWithBonus = baseTotal + bonus;
+        console.log(`Total Spent by ${this.name} (VIP ${this.vipLevel}): ${totalWithBonus.toFixed(2)}`);
+        return totalWithBonus;
+    }
+
+}
+// Test Case
+const vipCustomer = new VIPCustomer('Scum Pro', 'scum.pro@villainly.com', 'Platinum');
+vipCustomer.addPurchase(100);
+vipCustomer.addPurchase(200);
+vipCustomer.addPurchase(300);
+const vipTotal = vipCustomer.getTotalSpent();
+console.log(`Final VIP total: $${vipTotal.toFixed(2)}`);
