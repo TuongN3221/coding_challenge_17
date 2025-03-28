@@ -25,8 +25,8 @@ const totalSpent = customer1.getTotalSpent();
 // Task 2 
 class SalesRep {
     constructor(name){
-        this.name = name;
-        this.clients = []
+        this.name = name;// String
+        this.clients = []//Array
         console.log(`New Saes Represenative: ${name}`)
     }
     addClient(customer){
@@ -73,3 +73,31 @@ vipCustomer.addPurchase(200);
 vipCustomer.addPurchase(300);
 const vipTotal = vipCustomer.getTotalSpent();
 console.log(`Final VIP total: $${vipTotal.toFixed(2)}`);
+
+// Task 4
+function clientReportSystem(){
+    storedData = {
+        customers: [customer1, vipCustomer],
+        salesRep: [rep1]
+    }
+    //Reduce()
+    const totalSpending = storedData.customers.reduce((sum, customer) =>{
+        return sum + customer.getTotalSpent();
+    }, 0)
+    console.log(`Total Revenue: $${totalSpending.toFixed(2)}`)
+    //Filter()
+    const bigSpender = storedData.customers.filter(customer => {
+        return customer.getTotalSpent() > 500;
+    })
+    console.log(`Customers Purchase History Over $500: $${bigSpender}`)
+    //Map()
+    const customerSummary = storedData.customers.map(customer => {
+        return {
+            name: customer.name,
+            totalSpending: customer.getTotalSpent()
+        };
+    })
+    console.log(`Customer Spending Report: ${customerSummary}`)
+    return storedData
+}
+const clientData = clientReportSystem();
